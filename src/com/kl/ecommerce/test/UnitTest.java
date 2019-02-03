@@ -1,6 +1,8 @@
 package com.kl.ecommerce.test;
 
+import com.kl.ecommerce.dao.UserDao;
 import com.kl.ecommerce.domain.User;
+import com.kl.ecommerce.utils.BeanFactory;
 import com.kl.ecommerce.utils.JDBCUtils;
 import com.kl.ecommerce.utils.MyBeanUtils;
 import org.apache.commons.beanutils.BeanUtils;
@@ -48,5 +50,14 @@ public class UnitTest {
                 "6B8C426C70584C2BAF9EF26F39387630",
         };
         queryRunner.update(sql, params);
+    }
+    @Test
+    public void testBeanFactory() throws SQLException {
+        UserDao userDao = (UserDao) BeanFactory.createDaoInstance("UserDao");
+        User user = new User();
+        user.setUsername("kingsley");
+        user.setPassword("kingsley");
+        User uu = userDao.userLogin(user);
+        System.out.println(uu);
     }
 }

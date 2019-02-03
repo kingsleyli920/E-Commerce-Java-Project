@@ -48,4 +48,38 @@ public class ProductDaoImpl implements ProductDao {
         QueryRunner queryRunner = new QueryRunner(JDBCUtils.getDataSource());
         return queryRunner.query(sql, new BeanListHandler<Product>(Product.class), cid, startIndex, pageSize);
     }
+
+    @Override
+    public int findTotalRecords() throws Exception {
+        String sql = "select count(*) from product";
+        QueryRunner queryRunner = new QueryRunner(JDBCUtils.getDataSource());
+        Long num = (Long) queryRunner.query(sql, new ScalarHandler());
+        return num.intValue();
+    }
+
+    @Override
+    public List<Product> findAllProductsWithPage(int startIndex, int pageSize) throws Exception {
+        String sql = "select * from product order by pdate desc limit ?,?";
+        QueryRunner queryRunner = new QueryRunner(JDBCUtils.getDataSource());
+        return queryRunner.query(sql, new BeanListHandler<Product>(Product.class), startIndex, pageSize);
+    }
+
+    @Override
+    public void saveProduct(Product product) throws Exception {
+        String sql = "insert into product values(?,?,?,?,?,?,?,?,?,?)";
+        QueryRunner queryRunner = new QueryRunner(JDBCUtils.getDataSource());
+        Object[] params = {
+                product.getPid(),
+                product.getPname(),
+                product.getMarket_price(),
+                product.getShop_price(),
+                product.getPimage(),
+                product.getPdate(),
+                product.getIs_hot(),
+                product.getPdesc(),
+                product.getPflag(),
+                product.getCid(),
+        };
+        queryRunner.update(sql, params);
+    }
 }

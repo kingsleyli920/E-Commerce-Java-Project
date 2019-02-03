@@ -17,4 +17,10 @@ public interface OrderDao {
     List findMyOrderWithPage(User user, int startIndex, int pageSize) throws Exception;
 
     Order findOrderByOid(String oid) throws Exception;
+
+    void updateOrder(Order order) throws Exception;
+
+    List<Order> findAllOrders() throws Exception;
+
+    List<Order> findAllOrders(String state)throws Exception;;
 }

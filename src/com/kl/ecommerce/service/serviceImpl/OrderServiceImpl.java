@@ -7,13 +7,14 @@ import com.kl.ecommerce.domain.OrderItem;
 import com.kl.ecommerce.domain.PageModel;
 import com.kl.ecommerce.domain.User;
 import com.kl.ecommerce.service.OrderService;
+import com.kl.ecommerce.utils.BeanFactory;
 import com.kl.ecommerce.utils.JDBCUtils;
 
 import java.sql.Connection;
 import java.util.List;
 
 public class OrderServiceImpl implements OrderService {
-    OrderDao orderDao = new OrderDaoImpl();
+    OrderDao orderDao = (OrderDao) BeanFactory.createDaoInstance("OrderDao");
     @Override
     public void saveOrder(Order order) throws Exception {
         Connection connection = null;
@@ -48,5 +49,20 @@ public class OrderServiceImpl implements OrderService {
     public Order findOrderByOid(String oid) throws Exception {
 
         return orderDao.findOrderByOid(oid);
+    }
+
+    @Override
+    public void updateOrder(Order order) throws Exception {
+        orderDao.updateOrder(order);
+    }
+
+    @Override
+    public List<Order> findAllOrders() throws Exception {
+        return orderDao.findAllOrders();
+    }
+
+    @Override
+    public List<Order> findAllOrders(String state) throws Exception {
+        return orderDao.findAllOrders(state);
     }
 }

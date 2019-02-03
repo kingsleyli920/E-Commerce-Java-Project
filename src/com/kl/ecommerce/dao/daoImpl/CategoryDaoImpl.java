@@ -22,4 +22,16 @@ public class CategoryDaoImpl implements CategoryDao {
 
         return  queryRunner.query(sql, new BeanListHandler<Category>(Category.class));
     }
+
+    /**
+     * 获取全部分类
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public void addCate(Category category) throws Exception {
+        String sql = "insert into category values(?,?)";
+        QueryRunner queryRunner = new QueryRunner(JDBCUtils.getDataSource());
+        queryRunner.update(sql, category.getCname(), category.getCid());
+    }
 }

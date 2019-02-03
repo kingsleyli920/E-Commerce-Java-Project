@@ -13,4 +13,8 @@ public interface ProductService {
     Product findProductByPid(String pid) throws Exception;
 
     PageModel findProductsByCidWithPage(String cid, int curNum) throws Exception;
+
+    PageModel findAllProductsWithPage(int curNum) throws Exception;
+
+    void saveProduct(Product product) throws Exception;
 }

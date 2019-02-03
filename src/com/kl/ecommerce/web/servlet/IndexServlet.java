@@ -44,7 +44,6 @@ public class IndexServlet extends BaseServlet {
                 user.setPassword(cookie.getValue());
             }
         }
-        System.out.println(user);
         if (user.getUsername() != null && user.getPassword() != null) {
             user = userService.userLogin(user);
             //登录成功

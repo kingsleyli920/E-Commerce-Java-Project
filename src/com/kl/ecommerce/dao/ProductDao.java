@@ -15,4 +15,12 @@ public interface ProductDao {
     int findTotalProductsByCid(String cid) throws Exception;
 
     List findProductByCidWithPage(String cid, int startIndex, int pageSize) throws Exception;
+
+    int findTotalRecords() throws Exception;
+
+    ;
+
+    List<Product> findAllProductsWithPage(int startIndex, int pageSize) throws Exception;
+
+    void saveProduct(Product product) throws Exception;
 }

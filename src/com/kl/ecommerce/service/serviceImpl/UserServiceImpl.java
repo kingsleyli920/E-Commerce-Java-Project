@@ -8,16 +8,16 @@ import com.kl.ecommerce.service.UserService;
 import java.sql.SQLException;
 
 public class UserServiceImpl implements UserService {
+    UserDao userDao = new UserDaoImpl();
     @Override
     public void userRegister(User user) throws SQLException {
-        UserDao userDao = new UserDaoImpl();
+
         userDao.userRegister(user);
     }
 
     @Override
     public boolean userActive(String code) throws SQLException {
 
-        UserDao userDao = new UserDaoImpl();
         User user = userDao.userActive(code);
 
         if (user != null) {
@@ -34,7 +34,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User userLogin(User user) throws SQLException {
-        UserDao userDao = new UserDaoImpl();
         User user1 = userDao.userLogin(user);
 
         if (user1 == null) {
